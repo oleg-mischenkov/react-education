@@ -1,0 +1,16 @@
+.nav {
+    grid-column: 1/2;
+    padding-top: 10px;
+    background-color: aquamarine;
+}
+
+.nav a {
+    text-decoration: none;
+    margin: 4px 10px;
+    font-weight: 500;
+    color: white;
+}
+
+.nav a.activeLink {
+    color: brown;
+}
