@@ -7,14 +7,14 @@ const Dialogs = (props)=> {
         <div className={css.dialogs}>
             <div>
                 {
-                    props.date[0].map(
+                    props.users.map(
                         user => <Dialog name={user.name} id={user.id} />
                     )
                 }
             </div>
             <div className='messages'>
                 {
-                    props.date[1].map(
+                    props.messages.map(
                         message => <Message text={message.msg} />
                     )
                 }

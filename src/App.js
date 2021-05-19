@@ -12,8 +12,8 @@ function App(props) {
                 <Header />
                 <Navbar />
                 <div className='app-wrapper-content'>
-                    <Route render={ ()=> <Profile date={ props.date[2].userPosts} /> } path='/profile' />
-                    <Route render={ ()=> <Dialogs date={ [props.date[0].usersDate, props.date[1].userMessage ] } /> } path='/dialogs' />
+                    <Route render={ ()=> <Profile date={ props.posts} /> } path='/profile' />
+                    <Route render={ ()=> <Dialogs users={props.users} messages={props.messages} /> } path='/dialogs' />
                 </div>
             </div>
         </BrowserRouter>
