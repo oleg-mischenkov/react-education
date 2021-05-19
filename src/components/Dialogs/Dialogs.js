@@ -3,34 +3,18 @@ import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 
 const Dialogs = (props)=> {
-    let usersDate = [
-        {id: 1, name: 'Jhon'},
-        {id: 2, name: 'Shara'},
-        {id: 3, name: 'Bob'},
-        {id: 4, name: 'Dug'},
-        {id: 5, name: 'Boris'},
-        {id: 6, name: 'Cristina'},
-    ];
-
-    let userMessage = [
-        {id: 1, msg: 'Hello'},
-        {id: 2, msg: 'Hi, my name is Boris'},
-        {id: 3, msg: 'Yo Yo Yo!'},
-        {id: 4, msg: 'Yo Yo Yo!'}
-    ];
-
     return (
         <div className={css.dialogs}>
             <div>
                 {
-                    usersDate.map(
+                    props.date[0].map(
                         user => <Dialog name={user.name} id={user.id} />
                     )
                 }
             </div>
             <div className='messages'>
                 {
-                    userMessage.map(
+                    props.date[1].map(
                         message => <Message text={message.msg} />
                     )
                 }
