@@ -39,18 +39,18 @@ const Dialogs = ()=> {
     return (
         <div className={css.dialogs}>
             <div className={css.dialogItems}>
-                <Dialog name={usersDate[0].name} id={usersDate[0].id} />
-                <Dialog name={usersDate[1].name} id={usersDate[1].id} />
-                <Dialog name={usersDate[2].name} id={usersDate[2].id} />
-                <Dialog name={usersDate[3].name} id={usersDate[3].id} />
-                <Dialog name={usersDate[4].name} id={usersDate[4].id} />
-                <Dialog name={usersDate[5].name} id={usersDate[5].id} />
+                {
+                    usersDate.map(
+                        user => <Dialog name={user.name} id={user.id} />
+                    )
+                }
             </div>
             <div className={css.messages}>
-                <Message text={userMessage[0].msg} />
-                <Message text={userMessage[1].msg} />
-                <Message text={userMessage[2].msg} />
-                <Message text={userMessage[3].msg} />
+                {
+                    userMessage.map(
+                        message => <Message text={message.msg} />
+                    )
+                }
             </div>
         </div>
     );
