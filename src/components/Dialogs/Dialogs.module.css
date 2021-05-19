@@ -3,15 +3,6 @@
     grid-template-columns: 2fr 10fr;
 }
 
-.dialogItems .dialog a {
-    font-weight: bold;
-    color: darkolivegreen;
-}
-
-.dialogItems .dialog a.active {
-    color: goldenrod;
-}
-
 .messages .message {
     font-style: italic;
     color: #404040;

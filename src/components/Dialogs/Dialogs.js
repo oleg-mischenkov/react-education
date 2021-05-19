@@ -1,25 +1,8 @@
 import css from './Dialogs.module.css'
-import {NavLink} from "react-router-dom";
+import Dialog from "./Dialog/Dialog";
+import Message from "./Message/Message";
 
-const Dialog = (props)=> {
-    let path = "/dialogs/" + props.id;
-
-    return (
-        <div className={css.dialog}>
-            <NavLink to={path} activeClassName={css.active}>{props.name}</NavLink>
-        </div>
-    );
-}
-
-const Message = (props)=> {
-    return (
-        <div className={css.message}>
-            {props.text}
-        </div>
-    );
-}
-
-const Dialogs = ()=> {
+const Dialogs = (props)=> {
     let usersDate = [
         {id: 1, name: 'Jhon'},
         {id: 2, name: 'Shara'},
@@ -38,14 +21,14 @@ const Dialogs = ()=> {
 
     return (
         <div className={css.dialogs}>
-            <div className={css.dialogItems}>
+            <div>
                 {
                     usersDate.map(
                         user => <Dialog name={user.name} id={user.id} />
                     )
                 }
             </div>
-            <div className={css.messages}>
+            <div className='messages'>
                 {
                     userMessage.map(
                         message => <Message text={message.msg} />
