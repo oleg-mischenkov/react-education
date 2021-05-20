@@ -1,3 +1,5 @@
+import {renderApp} from "../render";
+
 let state = {
     profilePage: {
         userPosts: [
@@ -33,6 +35,7 @@ export let addPost = (post) => {
         likes: 0
     };
     postArr.push(msg);
+    renderApp(state)
 };
 
 export default state;
