@@ -6,7 +6,7 @@ const Posts = (props)=> {
     let textAreaRef = React.createRef();
 
     let addText = () => {
-        alert(textAreaRef.current.value);
+        props.addPost(textAreaRef.current.value);
     };
 
     return (

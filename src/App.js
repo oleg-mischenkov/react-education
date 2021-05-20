@@ -12,7 +12,7 @@ function App(props) {
                 <Header />
                 <Navbar />
                 <div className='app-wrapper-content'>
-                    <Route render={ ()=> <Profile date={ props.posts} /> } path='/profile' />
+                    <Route render={ ()=> <Profile date={props.posts} addPost={props.addPost} /> } path='/profile' />
                     <Route render={ ()=> <Dialogs users={props.users} messages={props.messages} /> } path='/dialogs' />
                 </div>
             </div>
