@@ -1,15 +1,22 @@
+import React from "react";
 import css from './Posts.module.css';
 import Post from "./Post/Post";
 
 const Posts = (props)=> {
+    let textAreaRef = React.createRef();
+
+    let addText = () => {
+        alert(textAreaRef.current.value);
+    };
+
     return (
         <div>
             <h4>My posts</h4>
             <div>
-                <textarea content={css.text} />
+                <textarea content={css.text} ref={textAreaRef} />
             </div>
             <div>
-                <button>add</button>
+                <button onClick={addText}>add</button>
             </div>
             {
                 props.date.map(
