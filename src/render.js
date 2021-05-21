@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import React from "react";
 import App from "./App";
-import {addPost} from "./redux/state";
+import {addPost, addTextAreaText} from "./redux/state";
 
 export let renderApp = (state) => {
     ReactDOM.render(
@@ -11,6 +11,7 @@ export let renderApp = (state) => {
                 messages={state.dialogsPage.userMessage}
                 posts={state.profilePage.userPosts}
                 addPost={addPost}
+                addTextAreaText={addTextAreaText}
             />
         </React.StrictMode>,
         document.getElementById('root')

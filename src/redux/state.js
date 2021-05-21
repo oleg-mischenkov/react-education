@@ -6,7 +6,8 @@ let state = {
             {id: 1, msg: 'Hi, how are you?', likes: 2},
             {id: 2, msg: 'It is my first post!', likes: 12},
             {id: 3, msg: 'I am happy', likes: 9}
-        ]
+        ],
+        textAreaText: 'Ok'
     },
     dialogsPage: {
         usersDate: [
@@ -25,6 +26,10 @@ let state = {
             {id: 4, msg: 'Yo Yo Yo!'}
         ]
     }
+};
+
+export let addTextAreaText = (text) => {
+    state.profilePage.textAreaText = text;
 };
 
 export let addPost = (post) => {

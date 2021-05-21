@@ -11,11 +11,21 @@ const Posts = (props)=> {
         textAreaRef.current.value = '';
     };
 
+    let addAreaText = () => {
+        props.addTextArea(
+            textAreaRef.current.value
+        );
+    };
+
     return (
         <div>
             <h4>My posts</h4>
             <div>
-                <textarea content={css.text} ref={textAreaRef} />
+                <textarea
+                    onChange={addAreaText}
+                    content={css.text}
+                    ref={textAreaRef}
+                    value={props.textAreaText} />
             </div>
             <div>
                 <button onClick={addText}>add</button>
