@@ -7,12 +7,11 @@ const Posts = (props)=> {
 
     let addText = () => {
         let text = textAreaRef.current.value;
-        props.addPost(text);
-        textAreaRef.current.value = '';
+        props.state.addPost(text);
     };
 
     let addAreaText = () => {
-        props.addTextArea(
+        props.state.addTextArea(
             textAreaRef.current.value
         );
     };
@@ -25,13 +24,13 @@ const Posts = (props)=> {
                     onChange={addAreaText}
                     content={css.text}
                     ref={textAreaRef}
-                    value={props.textAreaText} />
+                    value={props.state.getTextArea()} />
             </div>
             <div>
                 <button onClick={addText}>add</button>
             </div>
             {
-                props.date.map(
+                props.state.getPosts().map(
                     post => <Post msg={post.msg} likeCount={post.likes} />
                 )
             }

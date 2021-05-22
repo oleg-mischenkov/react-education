@@ -7,7 +7,7 @@ const Profile = (props)=> {
             <div>
                 <img className={css.headImg} src="https://nissi-beach.com/wp-content/uploads/2016/11/NissiBeach-21-1620x600.jpg" alt='main image' />
             </div>
-            <Posts date={props.date} addPost={props.addPost} addTextArea={props.addTextAreaText}/>
+            <Posts state={props.state}/>
         </div>
     );
 };
