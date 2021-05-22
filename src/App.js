@@ -13,7 +13,7 @@ function App(props) {
                 <Navbar />
                 <div className='app-wrapper-content'>
                     <Route render={ ()=> <Profile state={props.store} /> } path='/profile' />
-                    <Route render={ ()=> <Dialogs users={props.users} messages={props.messages} /> } path='/dialogs' />
+                    <Route render={ ()=> <Dialogs state={props.store} /> } path='/dialogs' />
                 </div>
             </div>
         </BrowserRouter>

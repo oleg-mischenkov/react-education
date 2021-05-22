@@ -7,14 +7,14 @@ const Dialogs = (props)=> {
         <div className={css.dialogs}>
             <div>
                 {
-                    props.users.map(
+                    props.state.getUsers().map(
                         user => <Dialog name={user.name} id={user.id} />
                     )
                 }
             </div>
             <div className='messages'>
                 {
-                    props.messages.map(
+                    props.state.getUserMessages().map(
                         message => <Message text={message.msg} />
                     )
                 }

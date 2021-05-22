@@ -32,6 +32,12 @@ export let store = {
     subscriber(observerFunc) {
         this._renderApp = observerFunc
     },
+    getUsers() {
+        return this._state.dialogsPage.usersDate;
+    },
+    getUserMessages() {
+        return this._state.dialogsPage.userMessage;
+    },
     addPost(post) {
         let postArr = this._state.profilePage.userPosts;
         let msg = {
