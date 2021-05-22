@@ -1,4 +1,4 @@
-import {renderApp} from "../render";
+let renderApp = ()=> {};
 
 let state = {
     profilePage: {
@@ -41,6 +41,10 @@ export let addPost = (post) => {
     };
     postArr.push(msg);
     renderApp(state)
+};
+
+export let renderListener = (observerFunc)=> {
+    renderApp = observerFunc;
 };
 
 export default state;
