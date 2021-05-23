@@ -29,16 +29,16 @@ export let store = {
     _renderApp() {
         console.log('it have not function')
     },
-    subscriber(observerFunc) {
+    _subscriber(observerFunc) {
         this._renderApp = observerFunc
     },
-    getUsers() {
+    _getUsers() {
         return this._state.dialogsPage.usersDate;
     },
-    getUserMessages() {
+    _getUserMessages() {
         return this._state.dialogsPage.userMessage;
     },
-    addPost(post) {
+    _addPost(post) {
         let postArr = this._state.profilePage.userPosts;
         let msg = {
             id: postArr.length + 1,
@@ -46,18 +46,30 @@ export let store = {
             likes: 0
         };
         postArr.push(msg);
-        this.addTextArea('');
+        this._addTextArea('');
         this._renderApp();
     },
-    getPosts() {
+    _getPosts() {
         return this._state.profilePage.userPosts
     },
-    addTextArea(text) {
+    _addTextArea(text) {
         this._state.profilePage.textAreaText = text;
         this._renderApp();
     },
-    getTextArea() {
+    _getTextArea() {
         return this._state.profilePage.textAreaText
+    },
+    dispatch(action) {
+        debugger;
+        return new Map([
+            ['GET-USERS', () => {return this._getUsers()}],
+            ['GET-USER-MESSAGES', () => {return this._getUserMessages()}],
+            ['GET-TEXT-AREA', () => {return this._getTextArea()}],
+            ['GET-POSTS', () => {return this._getPosts()}],
+            ['ADD-POST', () => this._addPost(action.post)],
+            ['ADD-AREA-TEXT', () => this._addTextArea(action.text)],
+            ['ADD-SUBSCRIBER', () => this._subscriber(action.observerFunc)]
+        ]).get(action.type)();
     }
 };
 

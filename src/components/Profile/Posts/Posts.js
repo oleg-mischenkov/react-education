@@ -7,13 +7,11 @@ const Posts = (props)=> {
 
     let addText = () => {
         let text = textAreaRef.current.value;
-        props.state.addPost(text);
+        props.state.dispatch({type: 'ADD-POST', post: text});
     };
 
     let addAreaText = () => {
-        props.state.addTextArea(
-            textAreaRef.current.value
-        );
+        props.state.dispatch({type: 'ADD-AREA-TEXT', text: textAreaRef.current.value})
     };
 
     return (
@@ -24,13 +22,13 @@ const Posts = (props)=> {
                     onChange={addAreaText}
                     content={css.text}
                     ref={textAreaRef}
-                    value={props.state.getTextArea()} />
+                    value={props.state.dispatch({type: 'GET-TEXT-AREA'})} />
             </div>
             <div>
                 <button onClick={addText}>add</button>
             </div>
             {
-                props.state.getPosts().map(
+                props.state.dispatch({type: 'GET-POSTS'}).map(
                     post => <Post msg={post.msg} likeCount={post.likes} />
                 )
             }

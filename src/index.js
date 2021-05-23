@@ -16,6 +16,6 @@ let renderApp = () => {
 
 renderApp();
 
-store.subscriber(renderApp);
+store.dispatch({type: 'ADD-SUBSCRIBER', observerFunc: renderApp});
 
 reportWebVitals();
