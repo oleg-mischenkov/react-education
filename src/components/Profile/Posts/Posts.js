@@ -1,18 +1,23 @@
 import React from "react";
 import css from './Posts.module.css';
 import Post from "./Post/Post";
+import {
+    addAreaTextActionType,
+    addPostActionType,
+    getPostsActionType,
+    getTextAreaActionType
+} from "../../../redux/state";
 
 const Posts = (props)=> {
     let textAreaRef = React.createRef();
 
-    let addText = () => {
-        let text = textAreaRef.current.value;
-        props.state.dispatch({type: 'ADD-POST', post: text});
-    };
+    let addText = () => props.state.dispatch(
+        addPostActionType(textAreaRef.current.value)
+    );
 
-    let addAreaText = () => {
-        props.state.dispatch({type: 'ADD-AREA-TEXT', text: textAreaRef.current.value})
-    };
+    let addAreaText = () => props.state.dispatch(
+        addAreaTextActionType(textAreaRef.current.value)
+    );
 
     return (
         <div>
@@ -22,13 +27,13 @@ const Posts = (props)=> {
                     onChange={addAreaText}
                     content={css.text}
                     ref={textAreaRef}
-                    value={props.state.dispatch({type: 'GET-TEXT-AREA'})} />
+                    value={props.state.dispatch( getTextAreaActionType() )} />
             </div>
             <div>
                 <button onClick={addText}>add</button>
             </div>
             {
-                props.state.dispatch({type: 'GET-POSTS'}).map(
+                props.state.dispatch( getPostsActionType() ).map(
                     post => <Post msg={post.msg} likeCount={post.likes} />
                 )
             }

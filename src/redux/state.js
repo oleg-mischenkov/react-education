@@ -1,3 +1,11 @@
+const GET_USERS = 'GET-USERS';
+const GET_USER_MESSAGES = 'GET-USER-MESSAGES';
+const GET_TEXT_AREA = 'GET-TEXT-AREA';
+const GET_POSTS = 'GET-POSTS';
+const ADD_POST = 'ADD-POST';
+const ADD_AREA_TEXT = 'ADD-AREA-TEXT';
+const ADD_SUBSCRIBER = 'ADD-SUBSCRIBER';
+
 export let store = {
     _state: {
         profilePage: {
@@ -60,17 +68,28 @@ export let store = {
         return this._state.profilePage.textAreaText
     },
     dispatch(action) {
-        debugger;
         return new Map([
-            ['GET-USERS', () => {return this._getUsers()}],
-            ['GET-USER-MESSAGES', () => {return this._getUserMessages()}],
-            ['GET-TEXT-AREA', () => {return this._getTextArea()}],
-            ['GET-POSTS', () => {return this._getPosts()}],
-            ['ADD-POST', () => this._addPost(action.post)],
-            ['ADD-AREA-TEXT', () => this._addTextArea(action.text)],
-            ['ADD-SUBSCRIBER', () => this._subscriber(action.observerFunc)]
+            [GET_USERS, () => {return this._getUsers()}],
+            [GET_USER_MESSAGES, () => {return this._getUserMessages()}],
+            [GET_TEXT_AREA, () => {return this._getTextArea()}],
+            [GET_POSTS, () => {return this._getPosts()}],
+            [ADD_POST, () => this._addPost(action.post)],
+            [ADD_AREA_TEXT, () => this._addTextArea(action.text)],
+            [ADD_SUBSCRIBER, () => this._subscriber(action.observerFunc)]
         ]).get(action.type)();
     }
 };
 
 window.store = store;
+
+export const getUserActionType = () => ({type: GET_USERS});
+
+export const getUserMsgActionType = () => ({type: GET_USER_MESSAGES});
+
+export const addAreaTextActionType = areaText => ({type: ADD_AREA_TEXT, text: areaText});
+
+export const addPostActionType = posText => ({type: ADD_POST, post: posText});
+
+export const getTextAreaActionType = () => ({type: GET_TEXT_AREA});
+
+export const getPostsActionType = () => ({type: GET_POSTS});
