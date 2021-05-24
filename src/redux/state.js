@@ -5,6 +5,9 @@ const GET_POSTS = 'GET-POSTS';
 const ADD_POST = 'ADD-POST';
 const ADD_AREA_TEXT = 'ADD-AREA-TEXT';
 const ADD_SUBSCRIBER = 'ADD-SUBSCRIBER';
+const GET_MESSAGE_BODY = 'GET-MESSAGE-BODY';
+const ADD_MESSAGE_BODY = 'ADD-MESSAGE-BODY';
+const ADD_USER_MESSAGE = 'ADD-USER-MESSAGE';
 
 export let store = {
     _state: {
@@ -31,7 +34,8 @@ export let store = {
                 {id: 2, msg: 'Hi, my name is Boris'},
                 {id: 3, msg: 'Yo Yo Yo!'},
                 {id: 4, msg: 'Yo Yo Yo!'}
-            ]
+            ],
+            messageBody: ''
         }
     },
     _renderApp() {
@@ -45,6 +49,23 @@ export let store = {
     },
     _getUserMessages() {
         return this._state.dialogsPage.userMessage;
+    },
+    _addUserMessage(message) {
+        let arrLen = this._state.dialogsPage.userMessage.length;
+        let msg = {
+            id: arrLen + 1,
+            msg: message
+        };
+        this._state.dialogsPage.userMessage.push(msg);
+        this._addMessageBody('');
+        this._renderApp();
+    },
+    _getMessageBody() {
+        return this._state.dialogsPage.messageBody;
+    },
+    _addMessageBody(message) {
+        this._state.dialogsPage.messageBody = message;
+        this._renderApp();
     },
     _addPost(post) {
         let postArr = this._state.profilePage.userPosts;
@@ -75,7 +96,10 @@ export let store = {
             [GET_POSTS, () => {return this._getPosts()}],
             [ADD_POST, () => this._addPost(action.post)],
             [ADD_AREA_TEXT, () => this._addTextArea(action.text)],
-            [ADD_SUBSCRIBER, () => this._subscriber(action.observerFunc)]
+            [ADD_SUBSCRIBER, () => this._subscriber(action.observerFunc)],
+            [GET_MESSAGE_BODY, () => {return this._getMessageBody()}],
+            [ADD_MESSAGE_BODY, () => this._addMessageBody(action.message)],
+            [ADD_USER_MESSAGE, () => this._addUserMessage(action.message)]
         ]).get(action.type)();
     }
 };
@@ -93,3 +117,9 @@ export const addPostActionType = posText => ({type: ADD_POST, post: posText});
 export const getTextAreaActionType = () => ({type: GET_TEXT_AREA});
 
 export const getPostsActionType = () => ({type: GET_POSTS});
+
+export const getMessageBodyActionType = () => ({type: GET_MESSAGE_BODY});
+
+export const addMessageBodyActionType = message => ({type: ADD_MESSAGE_BODY, message: message});
+
+export const addUserMessageActionType = message => ({type: ADD_USER_MESSAGE, message: message});
