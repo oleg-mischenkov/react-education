@@ -1,13 +1,16 @@
-const GET_USERS = 'GET-USERS';
-const GET_USER_MESSAGES = 'GET-USER-MESSAGES';
-const GET_TEXT_AREA = 'GET-TEXT-AREA';
-const GET_POSTS = 'GET-POSTS';
-const ADD_POST = 'ADD-POST';
+import {profileReducer} from "./reducer/profile-reducer";
+import {dialogReducer} from "./reducer/dialog-reducer";
+
+const GET_USERS = 'GET-USERS'; // +
+const GET_USER_MESSAGES = 'GET-USER-MESSAGES'; // +
+const GET_TEXT_AREA = 'GET-TEXT-AREA'; // +
+const GET_POSTS = 'GET-POSTS'; // +
+const ADD_POST = 'ADD-POST'; // +
 const ADD_AREA_TEXT = 'ADD-AREA-TEXT';
 const ADD_SUBSCRIBER = 'ADD-SUBSCRIBER';
-const GET_MESSAGE_BODY = 'GET-MESSAGE-BODY';
-const ADD_MESSAGE_BODY = 'ADD-MESSAGE-BODY';
-const ADD_USER_MESSAGE = 'ADD-USER-MESSAGE';
+const GET_MESSAGE_BODY = 'GET-MESSAGE-BODY'; // +
+const ADD_MESSAGE_BODY = 'ADD-MESSAGE-BODY'; // +
+const ADD_USER_MESSAGE = 'ADD-USER-MESSAGE'; // +
 
 export let store = {
     _state: {
@@ -41,7 +44,7 @@ export let store = {
     _renderApp() {
         console.log('it have not function')
     },
-    _subscriber(observerFunc) {
+    subscriber(observerFunc) {
         this._renderApp = observerFunc
     },
     _getUsers() {
@@ -89,22 +92,29 @@ export let store = {
         return this._state.profilePage.textAreaText
     },
     dispatch(action) {
-        return new Map([
-            [GET_USERS, () => {return this._getUsers()}],
-            [GET_USER_MESSAGES, () => {return this._getUserMessages()}],
-            [GET_TEXT_AREA, () => {return this._getTextArea()}],
-            [GET_POSTS, () => {return this._getPosts()}],
+        /*return new Map([
+            [GET_USERS, () => this._getUsers()],
+            [GET_USER_MESSAGES, () => this._getUserMessages()],
+            [GET_TEXT_AREA, () => this._getTextArea()],
+            [GET_POSTS, () => this._getPosts()],
             [ADD_POST, () => this._addPost(action.post)],
             [ADD_AREA_TEXT, () => this._addTextArea(action.text)],
             [ADD_SUBSCRIBER, () => this._subscriber(action.observerFunc)],
-            [GET_MESSAGE_BODY, () => {return this._getMessageBody()}],
+            [GET_MESSAGE_BODY, () => this._getMessageBody()],
             [ADD_MESSAGE_BODY, () => this._addMessageBody(action.message)],
             [ADD_USER_MESSAGE, () => this._addUserMessage(action.message)]
-        ]).get(action.type)();
+        ]).get(action.type)();*/
+debugger;
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogReducer(this._state.dialogsPage, action);
+
+        this._renderApp();
     }
 };
 
 window.store = store;
+
+export const addSubscriber = observer => ({type: ADD_SUBSCRIBER, observerFunc: observer});
 
 export const getUserActionType = () => ({type: GET_USERS});
 
