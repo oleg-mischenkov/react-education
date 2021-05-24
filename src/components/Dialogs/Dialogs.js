@@ -2,20 +2,17 @@ import css from './Dialogs.module.css'
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import {
-    addMessageBodyActionType, addUserMessageActionType,
-    getMessageBodyActionType,
-    getUserActionType,
-    getUserMsgActionType
-} from "../../redux/state";
+    addMessageBodyActionType,
+    addUserMessageActionType
+} from "../../redux/reducer/dialog-reducer";
 
 const Dialogs = (props)=> {
     let store = props.state;
-    let getMessage = () => store.dispatch( getMessageBodyActionType() );
     let putMessageChange = event => store.dispatch(
             addMessageBodyActionType(event.target.value)
         );
     let sendMessage = () => {
-        let message = store.dispatch( getMessageBodyActionType() );
+        let message = store.getState().dialogsPage.messageBody;
         store.dispatch( addUserMessageActionType(message) )
     }
 
@@ -23,14 +20,14 @@ const Dialogs = (props)=> {
         <div className={css.dialogs}>
             <div>
                 {
-                    store.dispatch( getUserActionType() ).map(
+                    store.getState().dialogsPage.usersDate.map(
                         user => <Dialog name={user.name} id={user.id} />
                     )
                 }
             </div>
             <div className='messages'>
                 {
-                    props.state.dispatch( getUserMsgActionType() ).map(
+                    store.getState().dialogsPage.userMessage.map(
                         message => <Message text={message.msg} />
                     )
                 }
@@ -38,7 +35,7 @@ const Dialogs = (props)=> {
             <div className={css.addMsg}>
                 <div>
                     <textarea
-                        value={getMessage()}
+                        value={store.getState().dialogsPage.messageBody}
                         onChange={putMessageChange}
                     />
                 </div>
