@@ -7,27 +7,28 @@ import {
 } from "../../redux/reducer/dialog-reducer";
 
 const Dialogs = (props)=> {
-    let store = props.state;
-    let putMessageChange = event => store.dispatch(
+    debugger;
+    let store = props.state.getState();
+    let putMessageChange = event => props.state.dispatch(
             addMessageBodyActionType(event.target.value)
         );
     let sendMessage = () => {
-        let message = store.getState().dialogsPage.messageBody;
-        store.dispatch( addUserMessageActionType(message) )
+        let message = store.dialogsPage.messageBody;
+        props.state.dispatch( addUserMessageActionType(message) )
     }
 
     return (
         <div className={css.dialogs}>
             <div>
                 {
-                    store.getState().dialogsPage.usersDate.map(
+                    store.dialogsPage.usersDate.map(
                         user => <Dialog name={user.name} id={user.id} />
                     )
                 }
             </div>
             <div className='messages'>
                 {
-                    store.getState().dialogsPage.userMessage.map(
+                    store.dialogsPage.userMessage.map(
                         message => <Message text={message.msg} />
                     )
                 }
@@ -35,7 +36,7 @@ const Dialogs = (props)=> {
             <div className={css.addMsg}>
                 <div>
                     <textarea
-                        value={store.getState().dialogsPage.messageBody}
+                        value={store.dialogsPage.messageBody}
                         onChange={putMessageChange}
                     />
                 </div>

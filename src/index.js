@@ -3,7 +3,7 @@ import reportWebVitals from './reportWebVitals';
 import ReactDOM from "react-dom";
 import React from "react";
 import App from "./App";
-import {store} from "./redux/state";
+import store from "./redux/redux-store";
 
 let renderApp = () => {
     ReactDOM.render(
@@ -16,7 +16,6 @@ let renderApp = () => {
 
 renderApp();
 
-/*store.dispatch({type: 'ADD-SUBSCRIBER', observerFunc: renderApp});*/
-store.subscriber(renderApp);
+store.subscribe(renderApp);
 
 reportWebVitals();
