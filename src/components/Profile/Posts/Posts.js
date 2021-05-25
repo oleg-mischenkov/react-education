@@ -1,23 +1,14 @@
 import React from "react";
 import css from './Posts.module.css';
 import Post from "./Post/Post";
-import {
-    addAreaTextActionType,
-    addPostActionType,
-} from "../../../redux/reducer/profile-reducer";
 
 const Posts = (props)=> {
     let textAreaRef = React.createRef();
 
-    let addText = () => props.state.dispatch(
-        addPostActionType(textAreaRef.current.value)
-    );
+    let addText = () => props.addText(textAreaRef.current.value);
 
-    let addAreaText = () => props.state.dispatch(
-        addAreaTextActionType(textAreaRef.current.value)
-    );
+    let addAreaText = () => props.addAreaText(textAreaRef.current.value);
 
-    debugger;
     return (
         <div>
             <h4>My posts</h4>
@@ -26,13 +17,13 @@ const Posts = (props)=> {
                     onChange={addAreaText}
                     content={css.text}
                     ref={textAreaRef}
-                    value={props.state.getState().profilePage.textAreaText} />
+                    value={props.areaTextValue} />
             </div>
             <div>
                 <button onClick={addText}>add</button>
             </div>
             {
-                props.state.getState().profilePage.userPosts.map(
+                props.posts.map(
                     post => <Post msg={post.msg} likeCount={post.likes} />
                 )
             }
