@@ -5,24 +5,32 @@ import {
     addPostActionType,
 } from "../../../redux/reducer/profile-reducer";
 import Posts from "./Posts";
+import StoreContext from "../../../StoreContext";
 
-const PostsContainer = (props)=> {
-    let commonState = props.state.getState();
+const PostsContainer = ()=> {
+    return <StoreContext.Consumer>
+        {
+            (store => {
+                let commonState = store.getState();
 
-    let addText = text => props.state.dispatch(
-        addPostActionType(text)
-    );
+                let addText = text => store.dispatch(
+                    addPostActionType(text)
+                );
 
-    let addAreaText = text => props.state.dispatch(
-        addAreaTextActionType(text)
-    );
-
-    return <Posts
-        addText={addText}
-        addAreaText={addAreaText}
-        areaTextValue={commonState.profilePage.textAreaText}
-        posts={commonState.profilePage.userPosts}
-    />;
+                let addAreaText = text => store.dispatch(
+                    addAreaTextActionType(text)
+                );
+                return (
+                    <Posts
+                        addText={addText}
+                        addAreaText={addAreaText}
+                        areaTextValue={commonState.profilePage.textAreaText}
+                        posts={commonState.profilePage.userPosts}
+                    />
+                );
+            })
+        }
+    </StoreContext.Consumer>
 };
 
 export default PostsContainer;
