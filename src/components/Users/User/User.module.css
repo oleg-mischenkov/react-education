@@ -1,0 +1,33 @@
+.user {
+    display: grid;
+    grid-template-columns: 1fr 11fr;
+    margin: 10px 0;
+}
+
+.ava > img {
+    width: 100%;
+}
+
+.button {
+    text-align: center;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 11fr 1fr;
+    margin-left: 15px;
+    padding: 15px;
+    border: #8b8b8b solid 1px;
+    border-radius: 10px;
+}
+
+.name {
+    margin: 0;
+    color: grey;
+}
+
+.location {
+    font-size: large;
+    font-variant-caps: petite-caps;
+    font-weight: 300;
+}
