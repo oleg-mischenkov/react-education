@@ -22,18 +22,24 @@ let initialState = {
 };
 
 export const dialogReducer = (state = initialState, action) => {
+
+    let innerState = {...state};
+    initialState.usersDate = [...state.usersDate];
+    initialState.userMessage = [...state.userMessage];
+    initialState.messageBody = state.messageBody;
+
     let addUserMessage = message => {
-        let arrLen = state.userMessage.length;
+        let arrLen = innerState.userMessage.length;
         let msg = {
             id: arrLen + 1,
             msg: message
         };
-        state.userMessage.push(msg);
-        state.messageBody = '';
-        return state;
+        innerState.userMessage.push(msg);
+        innerState.messageBody = '';
+        return innerState;
     };
 
-    let addMessageBody = (message) => state.messageBody = message;
+    let addMessageBody = (message) => innerState.messageBody = message;
 
 
     let map = new Map([
@@ -44,7 +50,7 @@ export const dialogReducer = (state = initialState, action) => {
     if (map.has(action.type)) {
         map.get(action.type)();
     }
-    return state;
+    return innerState;
 }
 
 export const addMessageBodyActionType = message => ({type: ADD_MESSAGE_BODY, message: message});

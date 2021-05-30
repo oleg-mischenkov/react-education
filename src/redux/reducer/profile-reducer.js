@@ -12,6 +12,11 @@ let initialState = {
 };
 
 export let profileReducer = (state = initialState, action) => {
+
+    let innerState = {...state};
+    innerState.userPosts = [...state.userPosts];
+    innerState.textAreaText = state.textAreaText;
+
     let addPost = (post, state) => {
         let postArr = state.userPosts;
         let msg = {
@@ -24,17 +29,17 @@ export let profileReducer = (state = initialState, action) => {
         return state;
     };
 
-    let addTextArea = text => state.textAreaText = text;
+    let addTextArea = text => innerState.textAreaText = text;
 
     let map = new Map([
-        [ADD_POST, () => addPost(action.post, state)],
+        [ADD_POST, () => addPost(action.post, innerState)],
         [ADD_AREA_TEXT, () => addTextArea(action.text)]
     ]);
 
     if (map.has(action.type)) {
         map.get(action.type)();
     }
-    return state;
+    return innerState;
 };
 
 export const addAreaTextActionType = areaText => ({type: ADD_AREA_TEXT, text: areaText});
