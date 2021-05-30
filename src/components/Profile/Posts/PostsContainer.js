@@ -1,36 +1,19 @@
-import React from "react";
-
-import {
-    addAreaTextActionType,
-    addPostActionType,
-} from "../../../redux/reducer/profile-reducer";
+import {addAreaTextActionType, addPostActionType,} from "../../../redux/reducer/profile-reducer";
 import Posts from "./Posts";
-import StoreContext from "../../../StoreContext";
+import {connect} from "react-redux";
 
-const PostsContainer = ()=> {
-    return <StoreContext.Consumer>
-        {
-            (store => {
-                let commonState = store.getState();
+let mapStateToProps = state => ({
+        areaTextValue: state.profilePage.textAreaText,
+        posts: state.profilePage.userPosts
+    })
 
-                let addText = text => store.dispatch(
-                    addPostActionType(text)
-                );
-
-                let addAreaText = text => store.dispatch(
-                    addAreaTextActionType(text)
-                );
-                return (
-                    <Posts
-                        addText={addText}
-                        addAreaText={addAreaText}
-                        areaTextValue={commonState.profilePage.textAreaText}
-                        posts={commonState.profilePage.userPosts}
-                    />
-                );
-            })
+let mapDispatchToProps = dispatch => ({
+        addText: (text) => {
+            dispatch(addPostActionType(text))
+        },
+        addAreaText: (text) => {
+            dispatch(addAreaTextActionType(text))
         }
-    </StoreContext.Consumer>
-};
+    });
 
-export default PostsContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);

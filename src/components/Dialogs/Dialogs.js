@@ -3,7 +3,6 @@ import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 
 const Dialogs = (props)=> {
-    debugger;
     let putMessageChange = event => props.putMessage(event.target.value);
     let sendMessage = () => props.sendMessage(props.messageBody)
 
