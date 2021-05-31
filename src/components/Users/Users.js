@@ -1,9 +1,10 @@
 import User from "./User/User";
+import * as axios from "axios";
 
 let Users = (props) => {
 
     if (props.users.length === 0) {
-        props.sendUsers(
+        /*props.sendUsers(
             [
                 {
                     id: 1, follow: true, avatarUrl: 'https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png', fullName: 'Oleg', status: 'I\'m happy!!!', location: {
@@ -24,18 +25,23 @@ let Users = (props) => {
                     }
                 }
             ]
-        );
+        );*/
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then( resp => {
+                debugger;
+                props.sendUsers(resp.data.items)
+            } );
     }
 
     return (
         <div>
             {props.users.map( user => <User
                 id={user.id}
-                avatar={user.avatarUrl}
-                name={user.fullName}
-                followed={user.follow}
+                avatar={user.photos.small}
+                name={user.name}
+                followed={user.followed}
                 status={user.status}
-                location={user.location}
+                /*location={user.location}*/
                 changeFollow={ id => props.follow(id) }
                 changeUnfollow={ id => props.unfollow(id) }
             /> )}

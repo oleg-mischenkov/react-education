@@ -7,13 +7,10 @@ let initialState = {
 };
 
 export const usersReducer = (state = initialState, action) => {
-
-    debugger
-
     let changeFollowState = (flag, userId) => {
         return state.users.map( item => {
             if (item.id === userId) {
-                return {...item, follow: flag};
+                return {...item, followed: flag};
             }
             return item;
         } )
@@ -49,7 +46,7 @@ export const usersReducer = (state = initialState, action) => {
     if (map.has(action.type)) {
         state = map.get(action.type)();
     }
-debugger
+
     return state;
 }
 

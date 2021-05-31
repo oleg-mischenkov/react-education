@@ -13,4 +13,6 @@
 
 .nav a.activeLink {
     color: brown;
+    background-color: white;
+    display: block;
 }

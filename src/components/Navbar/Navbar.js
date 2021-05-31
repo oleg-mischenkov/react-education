@@ -13,6 +13,9 @@ const Navbar = ()=> {
             <div>
                 <NavLink to='/news' activeClassName={css.activeLink}>News</NavLink>
             </div>
+            <div>
+                <NavLink to='/users' activeClassName={css.activeLink}>Users</NavLink>
+            </div>
         </nav>
     );
 };
