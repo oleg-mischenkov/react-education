@@ -1,18 +1,29 @@
 import {connect} from "react-redux";
 import Users from './Users'
-import {follow, sendUsers, unfollow} from "../../redux/reducer/users-reducer";
+import {
+    followActionType, sendCurrentPageActionType,
+    sendTotalUserCountActionType,
+    sendUsersActionType,
+    unfollowActionType
+} from "../../redux/reducer/users-reducer";
 
 let mapStateToProps = state => {
     return {
-        users: state.usersPage.users
+        users: state.usersPage.users,
+        totalUserCount: state.usersPage.totalUserCount,
+        usersOnPage: state.usersPage.usersOnPage,
+        currentPage: state.usersPage.currentPage,
+        maxPaginationButtonOnPage: state.usersPage.maxPaginationButtonOnPage
     }
 };
 
 let mapDispatchToProps = dispatch => {
     return {
-        follow: userId => dispatch( follow(userId) ),
-        unfollow: userId => dispatch( unfollow(userId) ),
-        sendUsers: newUsers => dispatch( sendUsers(newUsers) )
+        follow: userId => dispatch( followActionType(userId) ),
+        unfollow: userId => dispatch( unfollowActionType(userId) ),
+        sendUsers: newUsers => dispatch( sendUsersActionType(newUsers) ),
+        sendTotalUserCount: totalUserCount => dispatch( sendTotalUserCountActionType(totalUserCount) ),
+        sendCurrentPage: page => dispatch( sendCurrentPageActionType(page) )
     }
 };
 

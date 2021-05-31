@@ -1,9 +1,15 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SEND_USERS = 'SEND-USERS';
+const SEND_TOTAL_USER_COUNT = 'SEND-TOTAL-USER-COUNT';
+const SEND_CURRENT_PAGE = 'SEND_CURRENT_PAGE';
 
 let initialState = {
-    users: []
+    users: [],
+    totalUserCount: 0,
+    usersOnPage: 5,
+    currentPage: 1,
+    maxPaginationButtonOnPage: 10
 };
 
 export const usersReducer = (state = initialState, action) => {
@@ -33,14 +39,30 @@ export const usersReducer = (state = initialState, action) => {
     let changeUsers = newUsers => {
         return {
             ...state,
-            users: [...state.users, ...newUsers]
+            users: [...newUsers]
         }
     };
+
+    let changeTotalUserCount = count => {
+        return {
+            ...state,
+            totalUserCount: count
+        };
+    }
+
+    let changeCurrentPage = currentPage => {
+        return {
+            ...state,
+            currentPage: currentPage
+        };
+    }
 
     let map = new Map([
         [FOLLOW, () => changeToFollow(action.userId) ],
         [UNFOLLOW, () => changeToUnfollow(action.userId) ],
-        [SEND_USERS, () => changeUsers(action.users) ]
+        [SEND_USERS, () => changeUsers(action.users) ],
+        [SEND_TOTAL_USER_COUNT, () => changeTotalUserCount(action.count)],
+        [SEND_CURRENT_PAGE, () => changeCurrentPage(action.currentPage)]
     ]);
 
     if (map.has(action.type)) {
@@ -50,8 +72,12 @@ export const usersReducer = (state = initialState, action) => {
     return state;
 }
 
-export const follow = userId => ({type: FOLLOW, userId: userId});
+export const followActionType = userId => ({type: FOLLOW, userId});
 
-export const unfollow = userId => ({type: UNFOLLOW, userId: userId});
+export const unfollowActionType = userId => ({type: UNFOLLOW, userId});
 
-export const sendUsers = users => ({type: SEND_USERS, users: users});
+export const sendUsersActionType = users => ({type: SEND_USERS, users});
+
+export const sendTotalUserCountActionType = count => ({type: SEND_TOTAL_USER_COUNT, count});
+
+export const sendCurrentPageActionType = currentPage => ({type: SEND_CURRENT_PAGE, currentPage});
