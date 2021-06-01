@@ -1,9 +1,12 @@
-import css from "./User.module.css";
+import css from './User.module.css';
+import avatarUrl from './../../../assets/avatar.png'
 
 let User = props => {
-    let getAvatar = avatar => avatar != null ? avatar : 'https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png';
+    let getAvatar = avatar => avatar != null ? avatar : avatarUrl;
     let getButtonValue = btnValue =>  btnValue ? 'Follow' : 'Unfollow';
     let changeButton = () => props.followed ? props.changeUnfollow(props.id) : props.changeFollow(props.id);
+
+    debugger;
 
     return (
         <div className={css.user} key={props.id}>
