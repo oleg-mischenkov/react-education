@@ -1,12 +1,7 @@
 import {connect} from "react-redux";
 import Users from './Users'
 import {
-    followActionType,
-    sendCurrentPageActionType,
-    sendPreloaderActionType,
-    sendTotalUserCountActionType,
-    sendUsersActionType,
-    unfollowActionType
+    follow, sendCurrentPage, sendPreloader, sendTotalUserCount, sendUsers, unfollow
 } from "../../redux/reducer/users-reducer";
 import React from "react";
 import * as axios from "axios";
@@ -60,15 +55,13 @@ let mapStateToProps = state => {
     }
 };
 
-let mapDispatchToProps = dispatch => {
-    return {
-        follow: userId => dispatch( followActionType(userId) ),
-        unfollow: userId => dispatch( unfollowActionType(userId) ),
-        sendUsers: newUsers => dispatch( sendUsersActionType(newUsers) ),
-        sendTotalUserCount: totalUserCount => dispatch( sendTotalUserCountActionType(totalUserCount) ),
-        sendCurrentPage: page => dispatch( sendCurrentPageActionType(page) ),
-        sendPreloader: value => dispatch( sendPreloaderActionType(value) )
+export default connect(mapStateToProps,
+    {
+        follow,
+        unfollow,
+        sendUsers,
+        sendTotalUserCount,
+        sendCurrentPage,
+        sendPreloader
     }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersComponent);
+    )(UsersComponent);

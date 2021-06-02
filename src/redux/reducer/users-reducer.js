@@ -82,14 +82,14 @@ export const usersReducer = (state = initialState, action) => {
     return state;
 }
 
-export const followActionType = userId => ({type: FOLLOW, userId});
+export const follow = userId => ({type: FOLLOW, userId});
 
-export const unfollowActionType = userId => ({type: UNFOLLOW, userId});
+export const unfollow = userId => ({type: UNFOLLOW, userId});
 
-export const sendUsersActionType = users => ({type: SEND_USERS, users});
+export const sendUsers = users => ({type: SEND_USERS, users});
 
-export const sendTotalUserCountActionType = count => ({type: SEND_TOTAL_USER_COUNT, count});
+export const sendTotalUserCount = count => ({type: SEND_TOTAL_USER_COUNT, count});
 
-export const sendCurrentPageActionType = currentPage => ({type: SEND_CURRENT_PAGE, currentPage});
+export const sendCurrentPage = currentPage => ({type: SEND_CURRENT_PAGE, currentPage});
 
-export const sendPreloaderActionType = value => ({type: SEND_PRELOADER, preloader: value});
+export const sendPreloader = value => ({type: SEND_PRELOADER, preloader: value});
