@@ -6,8 +6,6 @@ let User = props => {
     let getButtonValue = btnValue =>  btnValue ? 'Follow' : 'Unfollow';
     let changeButton = () => props.followed ? props.changeUnfollow(props.id) : props.changeFollow(props.id);
 
-    debugger;
-
     return (
         <div className={css.user} key={props.id}>
             <div>

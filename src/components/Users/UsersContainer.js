@@ -3,6 +3,7 @@ import Users from './Users'
 import {
     followActionType,
     sendCurrentPageActionType,
+    sendPreloaderActionType,
     sendTotalUserCountActionType,
     sendUsersActionType,
     unfollowActionType
@@ -13,18 +14,23 @@ import * as axios from "axios";
 class UsersComponent extends React.Component {
 
     componentDidMount() {
+        this.props.sendPreloader(true);
+
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersOnPage}&page=${this.props.currentPage}`)
             .then( resp => {
                 this.props.sendUsers(resp.data.items);
                 this.props.sendTotalUserCount(resp.data.totalCount);
+                this.props.sendPreloader(false);
             } );
     }
 
     changePage = page => {
+        this.props.sendPreloader(true);
         this.props.sendCurrentPage(page);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersOnPage}&page=${page}`)
             .then( resp => {
                 this.props.sendUsers(resp.data.items);
+                this.props.sendPreloader(false);
             } );
     }
 
@@ -35,6 +41,7 @@ class UsersComponent extends React.Component {
             usersOnPage={this.props.usersOnPage}
             maxPaginationButtonOnPage={this.props.maxPaginationButtonOnPage}
             currentPage={this.props.currentPage}
+            preloader={this.props.preloader}
             follow={this.props.follow}
             unfollow={this.props.unfollow}
             changePage={this.changePage}
@@ -48,7 +55,8 @@ let mapStateToProps = state => {
         totalUserCount: state.usersPage.totalUserCount,
         usersOnPage: state.usersPage.usersOnPage,
         currentPage: state.usersPage.currentPage,
-        maxPaginationButtonOnPage: state.usersPage.maxPaginationButtonOnPage
+        maxPaginationButtonOnPage: state.usersPage.maxPaginationButtonOnPage,
+        preloader: state.usersPage.preloader
     }
 };
 
@@ -59,6 +67,7 @@ let mapDispatchToProps = dispatch => {
         sendUsers: newUsers => dispatch( sendUsersActionType(newUsers) ),
         sendTotalUserCount: totalUserCount => dispatch( sendTotalUserCountActionType(totalUserCount) ),
         sendCurrentPage: page => dispatch( sendCurrentPageActionType(page) ),
+        sendPreloader: value => dispatch( sendPreloaderActionType(value) )
     }
 };
 

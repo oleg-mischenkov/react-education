@@ -2,14 +2,16 @@ const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SEND_USERS = 'SEND-USERS';
 const SEND_TOTAL_USER_COUNT = 'SEND-TOTAL-USER-COUNT';
-const SEND_CURRENT_PAGE = 'SEND_CURRENT_PAGE';
+const SEND_CURRENT_PAGE = 'SEND-CURRENT-PAGE';
+const SEND_PRELOADER = 'SEND_PRELOADER';
 
 let initialState = {
     users: [],
     totalUserCount: 0,
     usersOnPage: 5,
     currentPage: 1,
-    maxPaginationButtonOnPage: 10
+    maxPaginationButtonOnPage: 10,
+    preloader: true
 };
 
 export const usersReducer = (state = initialState, action) => {
@@ -57,12 +59,20 @@ export const usersReducer = (state = initialState, action) => {
         };
     }
 
+    let changePreloader = value => {
+        return {
+            ...state,
+            preloader: value
+        };
+    }
+
     let map = new Map([
         [FOLLOW, () => changeToFollow(action.userId) ],
         [UNFOLLOW, () => changeToUnfollow(action.userId) ],
         [SEND_USERS, () => changeUsers(action.users) ],
         [SEND_TOTAL_USER_COUNT, () => changeTotalUserCount(action.count)],
-        [SEND_CURRENT_PAGE, () => changeCurrentPage(action.currentPage)]
+        [SEND_CURRENT_PAGE, () => changeCurrentPage(action.currentPage)],
+        [SEND_PRELOADER, () => changePreloader(action.preloader)]
     ]);
 
     if (map.has(action.type)) {
@@ -81,3 +91,5 @@ export const sendUsersActionType = users => ({type: SEND_USERS, users});
 export const sendTotalUserCountActionType = count => ({type: SEND_TOTAL_USER_COUNT, count});
 
 export const sendCurrentPageActionType = currentPage => ({type: SEND_CURRENT_PAGE, currentPage});
+
+export const sendPreloaderActionType = value => ({type: SEND_PRELOADER, preloader: value});

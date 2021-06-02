@@ -1,6 +1,7 @@
 import React from "react";
 import css from './Users.module.css'
 import User from "./User/User";
+import Preloader from "../common/Preloader/Preloader";
 
 let Users = (props) => {
 
@@ -20,9 +21,10 @@ let Users = (props) => {
 
     return (
         <div>
+            {props.preloader ? <Preloader /> : null}
             <div className={css.paginationBlock}>
                 {pages.map( page => {
-                    return <span
+                    return <span key={page}
                         className={ props.currentPage === page ? css.selectedPage: ''}
                         onClick={() => props.changePage(page) }>
                             {page}
